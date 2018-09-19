@@ -1,0 +1,43 @@
+{% extends template('page-layout-home','HomePage') %}
+
+{% block pageInfo %}{% endblock %}
+
+{% block content %}
+
+    {{ spyCmsBlock({
+        name: 'Inspirational block for Cameras'
+    }) }}
+
+    {{ spyCmsBlock({
+        name: 'Inspirational block for Accessories 1'
+    }) }}
+
+    {{ spyCmsBlock({
+        name: 'Home page camcorders'
+    }) }}
+
+    {{ spyCmsBlock({
+        name: 'Inspirational block for Samsung'
+    }) }}
+
+    {{ spyCmsBlock({
+        name: 'Inspirational block for Accessories 2'
+    }) }}
+
+    {{ spyCmsBlock({
+        name: 'Teaser with img home page'
+    }) }}
+
+    {{ spyCmsBlock({
+        name: 'Home page smartphones'
+    }) }}
+
+    {{ spyCmsBlock({
+        name: 'Quote home page'
+    }) }}
+
+    {#Replace if quote block is active#}
+    <div style="height: 80px;"></div>
+
+
+{% endblock %}

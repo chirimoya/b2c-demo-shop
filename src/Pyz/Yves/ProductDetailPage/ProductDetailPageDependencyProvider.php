@@ -8,6 +8,9 @@
 namespace Pyz\Yves\ProductDetailPage;
 
 use Pyz\Yves\ExampleProductColorGroupWidget\Plugin\ProductDetailPage\ExampleProductColorGroupWidgetPlugin;
+use Pyz\Yves\ProductRelationWidget\Plugin\ProductDetailPage\UpSellingProductsWidgetPlugin;
+use Pyz\Yves\ProductSetWidget\Plugin\ProductSetIdsWidgetPlugin;
+use Spryker\Yves\Kernel\Container;
 use SprykerShop\Yves\AvailabilityWidget\Plugin\ProductDetailPage\AvailabilityWidgetPlugin;
 use SprykerShop\Yves\CmsBlockWidget\Plugin\ProductDetailPage\ProductCmsBlockWidgetPlugin;
 use SprykerShop\Yves\PriceWidget\Plugin\ProductDetailPage\PriceWidgetPlugin;
@@ -22,6 +25,8 @@ use SprykerShop\Yves\WishlistWidget\Plugin\ProductDetailPage\WishlistWidgetPlugi
 
 class ProductDetailPageDependencyProvider extends SprykerShopProductDetailPageDependencyProvider
 {
+    const CLIENT_PRODUCT_STORAGE_PYZ = 'CLIENT_PRODUCT_STORAGE_PYZ';
+
     /**
      * @return \Spryker\Yves\Kernel\Dependency\Plugin\WidgetPluginInterface[]
      */
@@ -39,6 +44,35 @@ class ProductDetailPageDependencyProvider extends SprykerShopProductDetailPageDe
             ProductCmsBlockWidgetPlugin::class,
             ProductReviewWidgetPlugin::class,
             ExampleProductColorGroupWidgetPlugin::class,
+            UpSellingProductsWidgetPlugin::class,
+            ProductSetIdsWidgetPlugin::class,
         ];
+    }
+
+    /**
+     * @param \Spryker\Yves\Kernel\Container $container
+     *
+     * @return \Spryker\Yves\Kernel\Container
+     */
+    public function provideDependencies(Container $container)
+    {
+        $container = parent::provideDependencies($container);
+        $container = $this->addProductStoragePyzClient($container);
+
+        return $container;
+    }
+
+    /**
+     * @param \Spryker\Yves\Kernel\Container $container
+     *
+     * @return \Spryker\Yves\Kernel\Container
+     */
+    protected function addProductStoragePyzClient(Container $container)
+    {
+        $container[self::CLIENT_PRODUCT_STORAGE_PYZ] = function (Container $container) {
+            return $container->getLocator()->productStorage()->client();
+        };
+
+        return $container;
     }
 }

@@ -1,0 +1,54 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'filter-category'
+} %}
+
+{% define data = {
+    filter: null,
+    filterPath: null,
+    categories: []
+} %}
+
+{% block component %}
+    {% if data.categories is not empty %}
+        {{parent()}}
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    <ul class="menu">
+        {% for categoryNode in data.categories %}
+            {% set quantity = 0 %}
+            {% set hasChildren = categoryNode.children is defined and categoryNode.children is not empty %}
+
+            {% for filterValue in data.filter.values if (filterValue.value == categoryNode.nodeId) %}
+                {% set quantity = filterValue.docCount %}
+            {% endfor %}
+
+            {% if data.filterPath is not empty %}
+                {% set categoryUrl = url(data.filterPath, {categoryPath: (categoryNode.url)}) %}
+                {% set currentUrl = url(data.filterPath, {categoryPath: (app.request.attributes.get('categoryPath'))}) %}
+            {% else %}
+                {% set categoryUrl = categoryNode.url | replace({"'": "\\'", '"':'\\"'}) %}
+                {% set currentUrl = app.request.attributes.get('categoryPath') %}
+            {% endif %}
+
+            <li class="menu__item {% if hasChildren %}menu__item--has-children-list{% endif %} {% if currentUrl == categoryUrl %} active{% endif %}">
+                <button class="link" onclick="this.form.action='{{ categoryUrl }}'" {% if quantity == 0 %}disabled="disabled"{% endif %}>
+                    {{ categoryNode.name }}{% if hasChildren is empty %} ({{ quantity }}){% endif %}
+                </button>
+
+                {% if hasChildren %}
+                    {% include molecule('filter-category', 'CatalogPage') with {
+                        data: {
+                            filter: data.filter,
+                            filterPath: data.filterPath,
+                            categories: categoryNode.children
+                        }
+                    } only %}
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

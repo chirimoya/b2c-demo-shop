@@ -1,6 +1,7 @@
 {
     "extends": "./node_modules/@spryker/suite-frontend-builder/tsconfig.suite",
     "compilerOptions": {
+        "allowJs": true,
         "baseUrl": ".",
         "paths": {
             "*": [
@@ -8,6 +9,9 @@
             ],
             "ShopUi/*": [
                 "./vendor/spryker-shop/shop-ui/src/SprykerShop/Yves/ShopUi/Theme/default/*"
+            ],
+            "ShopUiProject/*": [
+                "./src/Pyz/Yves/ShopUi/Theme/default/*"
             ]
         }
     },

@@ -49,9 +49,9 @@ concrete_sku,name,quantity,is_never_out_of_stock,is_bundle
 048_26403666,Warehouse2,0,1,0
 049_30395396,Warehouse2,0,1,0
 050_31080444,Warehouse2,0,1,0
-051_29567823,Warehouse2,0,1,0
-051_30107816,Warehouse2,0,1,0
-051_30614390,Warehouse2,0,1,0
+051_29567823,Warehouse2,10,1,0
+051_30107816,Warehouse2,10,1,0
+051_30614390,Warehouse2,10,1,0
 052_29567823,Warehouse2,0,1,0
 052_30107816,Warehouse2,0,1,0
 052_30614390,Warehouse2,0,1,0
@@ -295,13 +295,3 @@ concrete_sku,name,quantity,is_never_out_of_stock,is_bundle
 212_123,Warehouse1,0,0,1
 213_123,Warehouse1,0,0,1
 214_123,Warehouse1,0,0,1
-215_123,Warehouse1,0,1,0
-215_124,Warehouse1,0,1,0
-216_123,Warehouse1,0,1,0
-217_123,Warehouse1,0,1,0
-217_1231,Warehouse 1,0,1,0
-218_123,Warehouse 1,0,1,0
-218_1231,Warehouse 1,100,0,0
-218_1232,Warehouse 1,0,1,0
-218_1233,Warehouse 1,0,1,0
-218_1234,Warehouse 1,10,0,0
